@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Feed.css'
-import thumbnail1 from '../../assets/thumbnail1.png'
 import { Link } from 'react-router-dom'
 import { API_KEY, value_converter } from '../../Data'
 import moment from 'moment/moment'
@@ -19,22 +18,22 @@ const Feed = ({category}) => {
         fetchData();
     },[category])
 
-  return (
-    <div className="feed">
-        {data.map((item,index)=>{
-            return (
-                <Link to={`video/${item.snippet.categoryId}/${item.id}`} className='card'>
-                    <img src={item.snippet.thumbnails.medium.url} alt="" />
-                    <h2>{item.snippet.title}</h2>
-                    <h3>{item.snippet.channelTitle}</h3>
-                    <p>{value_converter(item.statistics.viewCount)} views &bull; {moment(item.snippet.publishedAt).fromNow()}</p>
-                </Link>
-            )
-        })}
+    return (
+        <div className="feed">
+            {data.map((item,index)=>{
+                return (
+                    <Link to={`video/${item.snippet.categoryId}/${item.id}`} className='card'>
+                        <img src={item.snippet.thumbnails.medium.url} alt="" />
+                        <h2>{item.snippet.title}</h2>
+                        <h3>{item.snippet.channelTitle}</h3>
+                        <p>{value_converter(item.statistics.viewCount)} views &bull; {moment(item.snippet.publishedAt).fromNow()}</p>
+                    </Link>
+                )
+            })}
+            
+        </div>
         
-    </div>
-    
-  )
+    )
 }
 
 export default Feed
